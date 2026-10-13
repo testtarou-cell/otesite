@@ -17,25 +17,6 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape' && menu?.getA
 document.addEventListener('click', e => { if (!e.target.closest('.header')) closeMenu(); });
 window.matchMedia('(min-width:801px)').addEventListener('change', e => { if (e.matches) closeMenu(); });
 
-const filters = [...document.querySelectorAll('[data-filter]')];
-function filterSchedule(value) {
-  filters.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.filter === value)));
-  const rows = [...document.querySelectorAll('[data-audience]')];
-  let count = 0;
-  rows.forEach(r => { r.hidden = value !== 'all' && r.dataset.audience !== value; if (!r.hidden) count++; });
-  const status = document.querySelector('#schedule-count');
-  if (status) status.textContent = `${count}件のレッスンを表示しています。`;
-}
-filters.forEach(b => b.addEventListener('click', () => {
-  filterSchedule(b.dataset.filter);
-  history.replaceState(null, '', `#${b.dataset.filter}`);
-}));
-if (filters.length) {
-  const requested = location.hash.slice(1);
-  filterSchedule(filters.some(b => b.dataset.filter === requested) ? requested : 'all');
-  if (filters.some(b => b.dataset.filter === requested)) document.querySelector('#regular')?.scrollIntoView();
-}
-
 const dialog = document.querySelector('#photo-dialog');
 const photos = [...document.querySelectorAll('[data-photo]')];
 let photoIndex = 0, opener;

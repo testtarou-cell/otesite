@@ -10,7 +10,7 @@ for(const file of files){
   if(/^(https?:|tel:|mailto:|data:)/.test(url))continue;
   const [target,hash]=url.split('#');
   if(target&&!fs.existsSync(path.join(dist,target)))failures.push(`${file}: missing ${target}`);
-  if(hash&&!['general','junior','family','all','step','other'].includes(hash)){
+  if(hash){
    const content=target&&fs.existsSync(path.join(dist,target))?fs.readFileSync(path.join(dist,target),'utf8'):html;
    if(!content.includes(`id="${hash}"`))failures.push(`${file}: missing anchor ${url}`);
   }
