@@ -1,0 +1,30 @@
+{
+  "month": 11,
+  "year": null,
+  "source": "ユーザー提供の11月スケジュール画像。年は確認中。",
+  "notices": ["11月14日はイベント参加のため、第2土曜日のレッスンを第1土曜日へ振り替えます。", "祝日による変則日程があります。月間表をご確認ください。"],
+  "days": [
+    {"day":2,"weekday":"月","events":[{"time":"18:10","name":"Jr. HIPHOP"},{"time":"19:15","name":"JAZZ"}]},
+    {"day":3,"weekday":"火","events":[],"note":"祝日"},
+    {"day":4,"weekday":"水","events":[{"time":"17:00","name":"Jr. Jazz"},{"time":"18:10","name":"Jr. Jazz"}]},
+    {"day":6,"weekday":"金","events":[{"time":"18:10","name":"Jr. ベリー"},{"time":"20:15","name":"HIPHOP 社会人"}]},
+    {"day":7,"weekday":"土","events":[{"time":"13:00","name":"ステップ"},{"time":"14:00","name":"Jr. オープン"},{"time":"17:00","name":"キッズ親子","note":"第2土曜日から振替"},{"time":"18:30","name":"FREEスタイル","note":"第2土曜日から振替"}]},
+    {"day":9,"weekday":"月","events":[{"time":"18:10","name":"Jr. JAZZ LOCK"},{"time":"19:15","name":"HIPHOP"}]},
+    {"day":10,"weekday":"火","events":[{"time":"18:10","name":"Jr. ガールズ"},{"time":"19:15","name":"J・LOCK"},{"time":"","name":"外部レッスン / 月舘教室"}]},
+    {"day":12,"weekday":"木","events":[{"time":"20:30","name":"リズミカルベリー"}]},
+    {"day":13,"weekday":"金","events":[{"time":"18:10","name":"Jr. A"},{"time":"19:15","name":"TAP"}]},
+    {"day":14,"weekday":"土","events":[],"note":"イベントのため、レッスンは第1土曜日へ振替"},
+    {"day":16,"weekday":"月","events":[{"time":"18:10","name":"Jr. HIPHOP"},{"time":"19:15","name":"JAZZ"}]},
+    {"day":17,"weekday":"火","events":[{"time":"18:10","name":"Jr. ガールズ"},{"time":"19:15","name":"J・LOCK"},{"time":"","name":"外部レッスン / 本宮教室"}]},
+    {"day":18,"weekday":"水","events":[{"time":"17:00","name":"Jr. Jazz"},{"time":"18:10","name":"Jr. Jazz"}]},
+    {"day":19,"weekday":"木","events":[{"time":"19:30","name":"JAZZ 社会人"}]},
+    {"day":20,"weekday":"金","events":[{"time":"18:10","name":"Jr. ベリー"},{"time":"20:15","name":"HIPHOP 社会人"}]},
+    {"day":21,"weekday":"土","events":[{"time":"13:00","name":"ステップ"},{"time":"14:00","name":"Jr. オープン"}]},
+    {"day":23,"weekday":"月","events":[],"note":"祝日"},
+    {"day":24,"weekday":"火","events":[{"time":"","name":"外部レッスン / 月舘教室"}]},
+    {"day":26,"weekday":"木","events":[{"time":"19:15","name":"J・LOCK 社会人"}]},
+    {"day":27,"weekday":"金","events":[{"time":"18:10","name":"Jr. A"},{"time":"19:15","name":"TAP"}]},
+    {"day":28,"weekday":"土","events":[{"time":"18:30","name":"FREEスタイル"}]},
+    {"day":30,"weekday":"月","events":[{"time":"18:10","name":"Jr. JAZZ LOCK"},{"time":"19:15","name":"HIPHOP"}]}
+  ]
+}
