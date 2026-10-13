@@ -1,5 +1,11 @@
 # 画像の出典
 
+## 案内ページのイラスト4点
+
+`about-illustration-v1.webp`、`join-illustration-v1.webp`、`schedule-illustration-v1.webp`、`fees-illustration-v1.webp` は、既存トップのオリジナルイラストを人物・画風の参考として、built-in ImageGenで個別に新規生成しています。背景の透明度を保ってWebPに最適化しています。
+
+紹介は仲間とダンス、入会は初めての人のお迎え、予定はカレンダー、料金はレッスンチケットを選ぶ場面です。架空のキャラクターで、実際の生徒・講師を描写したものではありません。生成プロンプト一式は `illustration-prompts.json` に記録しています。
+
 ## スクールの実写真
 
 旧公式サイトで公開されている写真を、ユーザーの依頼に基づき使用。WebPに最適化して同梱しています。写真の内容は変更していません。
