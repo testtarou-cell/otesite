@@ -43,4 +43,8 @@
  .has-illustration .page-intro-copy>.lead{grid-area:3 / 1}
  .page-intro-art{grid-area:3 / 2;align-self:center;margin:0}
 }
+.access-layout .info-list{margin:0}
+.access-visual{display:flex;flex-direction:column;align-items:flex-start;gap:24px;min-width:0}
+.access-visual figure{width:100%}
+.access-visual .button{max-width:100%}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
