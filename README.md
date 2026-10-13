@@ -1,79 +1,64 @@
-# O・TE Dance School リニューアル試作
+# O・TE Dance School
 
-福島市のO・TE Dance Schoolを紹介する、6ページの静的サイトです。トップと4つの案内ページにはオリジナルのイラスト、紹介欄には旧公式サイトの実写真を使っています。お問い合わせ・体験・見学は公式LINEへ接続します。
+福島市のダンススクールを紹介する6ページの静的サイトです。トップと4つの案内ページにオリジナルのイラストを使い、実際の活動写真も掲載しています。体験・見学の相談は公式LINEへ接続します。
 
-## パソコンで確認する
+## サイトを見る
 
-Node.js 22以上で、次を実行します。追加ライブラリのインストールは不要です。
+### GitHubで公開されたサイト
+
+https://testtarou-cell.github.io/otesite/
+
+このURLを送れば、ログインせずに見てもらえます。`main`への更新をGitHub Actionsが検査・ビルドし、GitHub Pagesへ自動公開します。Cloudflareのアカウント・APIトークンは不要です。
+
+### ローカルで見る
+
+サイト一式をダウンロード・展開し、ルートの `index.html` をダブルクリックしてください。`dist/index.html` を直接開いても表示できます。
+
+**閲覧にPython・Node.js・Webサーバーは不要です。** HTML・CSS・JavaScriptと画像が同梱されています。個々のHTMLだけを移動せず、フォルダ一式を保ってください。
+
+## 内容を更新する
+
+ソースから公開用HTMLを生成する場合は、Node.js 22以上で実行します。追加のライブラリのインストールは不要です。
 
 ```sh
 npm run build
 npm run check
-npm run dev
 ```
 
-ブラウザで `http://127.0.0.1:4173/` を開きます。終了は `Ctrl+C`。ソースを編集したら `npm run build` を実行し、ブラウザを更新してください。
-
-## 更新する場所
+ビルド後は `index.html` を開き直すか、ブラウザを再読み込みします。開発用のHTTPプレビューを使いたい場合は `npm run dev` を実行します。
 
 | 内容 | ファイル |
 | --- | --- |
 | 公式LINE・Instagram・住所・料金 | `src/site.json` |
 | 月間予定・振替のお知らせ | `src/monthly-schedule.json` |
 | 月間表の画像 | `dist/assets/monthly-schedule.png` |
-| 文面・ページの構成 | `scripts/build.mjs` |
+| ページの文面・構成 | `scripts/build.mjs` |
 | デザイン | `src/styles.css` |
 | メニュー・写真の拡大 | `src/app.js` |
 
-`dist/` が公開用ファイルです。ビルドは画像を消しません。写真を差し替える場合は、同じ名前の画像を `dist/assets/` に置き、ビルドしてください。
-
 Codexへの依頼例：
 
-> 添付の12月スケジュールに合わせて、月間表の画像と日付別の一覧を更新してください。元の表と照合し、振替の案内も更新して、ローカルプレビューを開いてください。
+> 添付の12月スケジュールに合わせて、月間表の画像と日付別の一覧を更新してください。元の表と照合し、振替の案内も更新して、ローカルで確認できるHTMLを作ってください。
 
-## スケジュールの運用
+画像に年の記載がないため、現在の月間データの `year` は `null` です。未記載の時刻は補完していません。通常クラスの旧表は表示していません。元がExcelやGoogleスプレッドシートなら、CSVから月間データを作る仕組みへの拡張も可能です。
 
-現在は、提供画像を表示し、同じ内容をJSONから日付別に読みやすく表示しています。未記載の時刻は補完していません。画像に年の記載がないため、`year` は `null` です。スケジュールページには月間予定のみを掲載し、旧サイトの通常クラス表は表示していません。
+## 検索設定はビルドで自動選択
 
-まずは現在の表をそのまま作り続け、毎月画像と一覧をCodexで更新する方法が簡単です。ExcelやGoogleスプレッドシートが元データなら、あとでCSVから一覧を作成する仕組みに拡張できます。Googleカレンダーの埋め込みも可能ですが、元の表とは別の予定入力が必要になりやすいため、この初版には追加していません。
+- **通常の `npm run build` とGitHub Actions：** 本番用。noindexを入れず、検索エンジンの登録を許可します。手動で解除する作業はありません。
+- **`npm run build:preview`：** 明示的に確認用を作りたい場合だけ使用。noindexを付けます。次の通常ビルドで自動的に解除されます。
 
-## お知らせとLINE
+robots.txtはページへのアクセスを許可します。noindexは検索結果からの除外指定で、閲覧制限ではありません。GitHub Pagesの公開サイトは誰でも閲覧でき、検索結果に載る可能性があります。
 
-トップには月間予定に関係する振替・祝日の案内を表示します。衣装・DVD・保護者への個別連絡などは、公式LINEで確認する導線です。最新の提供案内に合わせ、休会・退会は前月20日までの指定用紙申請としてあります。
+## お知らせと手続き
 
-## GitHub ActionsとCloudflare Pages
+トップには月間予定に関係する振替・祝日の案内を表示します。衣装・DVD・保護者向けの連絡は公式LINEで確認する導線です。クラス追加・変更は前月まで、休会・退会は前月20日までの指定用紙申請として案内しています。
 
-`.github/workflows/site.yml` は、mainへのpush・main向けのPRでビルドとファイル検査を行い、確認用のHTML一式をActionsのArtifactに保存します。
+## イラスト・写真
 
-CloudflareでDirect UploadのPagesプロジェクトを用意し、production branchを `main` に設定したうえで、GitHubリポジトリのSettings → Secrets and variables → Actionsに次を設定します。
+画像の出典は `ASSETS.md`、4つの案内ページ用イラストの生成プロンプトは `illustration-prompts.json` に記録しています。実際の生徒・講師を描いたイラストではありません。
 
-| 種類 | 名前 | 内容 |
-| --- | --- | --- |
-| Variable | `CLOUDFLARE_PAGES_PROJECT` | Pagesのプロジェクト名 |
-| Secret | `CLOUDFLARE_ACCOUNT_ID` | CloudflareのアカウントID |
-| Secret | `CLOUDFLARE_API_TOKEN` | 対象アカウントのPages編集権限を持つAPIトークン |
+デザインは文字と写真の見せ方を参考にし、O・TE向けに配色・構成・コピー・イラストを制作しています。他サイトのコード・ロゴ・写真は使用していません。
 
-設定がない間は検査だけ実行し、公開処理はスキップします。同じリポジトリ内のPRは `pr-番号` のプレビューへ、mainは本番へ公開します。forkからのPRは公開用Secretを使いません。
-
-参考：https://developers.cloudflare.com/pages/how-to/use-direct-upload-with-continuous-integration/
-
-## 一般公開前に確認する内容
-
-- 現在の料金・通常クラス・所在地。
-- 11月スケジュールの年と、画像から整理した日付別一覧。
-- 入会時の支払いと、クラス変更・休会・退会の条件。
-- 写真の継続掲載とプライバシーポリシー案。
-- 全HTMLの `noindex,nofollow,noimageindex` と `robots.txt` の設定。現在は試作のため検索除外を指定しています。robots.txtはクローラーが各ページのnoindexを読める設定です。一般向けの正式サイトとして検索に載せる場合は、noindexを解除します。noindexは閲覧制限ではありません。
-
-GitHubに置くソースとPagesで公開するサイトは別です。画像や元データは、公開リポジトリでは誰でも取得できます。LINEの通知画像そのものは、このソースには含めていません。
-
-## デザインの参考と画像
-
-最近の事例紹介と、実サイトの文字・写真の見せ方を調べました。コピー・配色・構成・画像はO・TE向けに制作しています。他サイトのコード・ロゴ・画像は使用していません。
-
-- [Family Style / Awwwards 2025 Honorable Mention](https://www.awwwards.com/sites/family-style)
-- [Family Style](https://wearefamilystyle.com/)
-- [ZEAL STUDIOS](https://zeal-studios.com/)
-- [ダンススクールのデザイン事例 / ワクタス 2025](https://wakutas.co.jp/blog/7427)
-
-画像の出典と生成プロンプトは `ASSETS.md` を参照してください。
+- https://wearefamilystyle.com/
+- https://zeal-studios.com/
+- https://wakutas.co.jp/blog/7427

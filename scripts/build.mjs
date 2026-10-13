@@ -2,6 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 const root = path.resolve(import.meta.dirname, '..');
 const out = path.join(root, 'dist');
+const previewBuild = process.argv.includes('--preview');
+const robotsMeta = previewBuild ? '<meta name="robots" content="noindex,nofollow,noimageindex">' : '';
 const site = JSON.parse(fs.readFileSync(path.join(root,'src/site.json'),'utf8'));
 const month = JSON.parse(fs.readFileSync(path.join(root,'src/monthly-schedule.json'),'utf8'));
 fs.mkdirSync(out,{recursive:true});
@@ -32,7 +34,7 @@ const intro=(title,en,copy)=>{
 const notice=()=>`<div class="notice"><strong>掲載内容について</strong>最新の内容は、お申し込み前に公式LINEでご確認ください。</div>`;
 const document=(file,title,content)=>{
  const description=file==='index.html'?'福島市のO・TE Dance School。2歳から大人まで、自分らしくダンスを楽しもう。レッスン案内・スケジュール・料金、体験や見学のご相談は公式LINEへ。':`${title}｜福島市のO・TE Dance School。体験・見学のお申し込みは公式LINEへ。`;
- fs.writeFileSync(path.join(out,file),`<!doctype html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${e(description)}"><meta name="robots" content="noindex,nofollow,noimageindex"><meta name="theme-color" content="#f5f2ea"><meta property="og:type" content="website"><meta property="og:title" content="${e(title)}｜O・TE Dance School"><meta property="og:description" content="${e(description)}"><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css">${file==='index.html'?'<link rel="preload" href="assets/dance-hero.webp" as="image">':''}<title>${e(title)}｜O・TE Dance School</title><script src="app.js" defer></script></head><body id="top">${header(file)}<main id="main">${content}${contact()}</main>${footer()}</body></html>`,'utf8');
+ fs.writeFileSync(path.join(out,file),`<!doctype html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${e(description)}">${robotsMeta}<meta name="theme-color" content="#f5f2ea"><meta property="og:type" content="website"><meta property="og:title" content="${e(title)}｜O・TE Dance School"><meta property="og:description" content="${e(description)}"><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css">${file==='index.html'?'<link rel="preload" href="assets/dance-hero.webp" as="image">':''}<title>${e(title)}｜O・TE Dance School</title><script src="app.js" defer></script></head><body id="top">${header(file)}<main id="main">${content}${contact()}</main>${footer()}</body></html>`,'utf8');
 };
 const gallery=[['stage.webp','発表会のステージで踊るメンバー','01 / ON STAGE'],['studio.webp','スタジオでのレッスン風景','02 / IN THE STUDIO'],['community.webp','イベントで笑顔を見せるスクールのメンバー','03 / TOGETHER'],['kids.webp','屋外のイベントで踊るキッズのメンバー','04 / DANCE & SMILE']];
 const news=month.notices.map((n,i)=>`<a class="news-row" href="schedule.html#monthly"><span class="news-type">${i?'LESSON':'SCHEDULE'}</span><span>${e(n)}</span>${arrow}</a>`).join('');
@@ -45,5 +47,8 @@ document('fees.html','レッスン料金表',`${intro('レッスン料金表','L
 const monthlyList=month.days.map(day=>`<div class="month-day"><div class="month-date"><strong>${day.day}</strong><span>${day.weekday}曜日</span></div><div>${day.events.length?day.events.map(ev=>`<div class="month-event"><time>${e(ev.time||'時刻未記載')}</time><span>${e(ev.name)}</span>${ev.note?`<small>${e(ev.note)}</small>`:''}</div>`).join(''):`<p class="month-rest">${e(day.note)}</p>`}</div></div>`).join('');
 document('schedule.html','レッスンスケジュール',`${intro('レッスンスケジュール','LESSON SCHEDULE','毎月のレッスン予定をご案内します。')}<div class="wrap page-body"><section id="monthly"><div class="section-head"><div><span class="eyebrow">MONTHLY SCHEDULE</span><h2>${month.month}月のレッスン予定</h2></div><a class="button outline" href="assets/monthly-schedule.png" ${ext}>月間表を大きく見る${arrow}</a></div><div class="monthly-layout"><figure class="monthly-original"><a href="assets/monthly-schedule.png" ${ext}>${img('monthly-schedule.png','11月の月間レッスンスケジュール。下に日付別の一覧があります。','width="929" height="1280"')}</a><figcaption>タップすると元の表を拡大できます。</figcaption></figure><div class="month-agenda"><span class="eyebrow">DAY BY DAY</span><h3>日付別にチェック</h3>${monthlyList}</div></div></section></div>`);
 document('privacy.html','プライバシーポリシー',`${intro('プライバシーポリシー','PRIVACY POLICY','サイトと外部サービスのご利用について。')}<div class="wrap page-body"><div class="notice"><strong>リニューアルに向けた確認用の案です。</strong>公開前に、スクールの実際の個人情報の取り扱いと、公開先の運用に合わせて内容を確認します。</div><div class="prose"><h2>お問い合わせについて</h2><p>本サイトからのお問い合わせは、公式LINEへご案内しています。本サイト内に入力・送信するお問い合わせフォームはありません。LINE上での情報の取り扱いは、スクールの運用とLINEの定める方針をご確認ください。</p><h2>外部サービスへのリンク</h2><p>本サイトには、公式LINE、Instagram、Google Mapsへのリンクがあります。リンク先へ移動した後は、それぞれのサービスの利用規約とプライバシーポリシーが適用されます。</p><h2>サイトの閲覧について</h2><p>この試作サイトでは、閲覧者向けの会員登録・コメント投稿機能や、独自のアクセス解析ツールは設けていません。公開先のサービスでは、アクセス記録や、確認用サイトへのサインインに必要な情報を取り扱う場合があります。</p><h2>写真・イラストについて</h2><p>スクールの写真は旧公式サイトの掲載画像を利用しています。トップのダンスイラストは、このリニューアル案のために作成したイメージです。</p><h2>ご相談窓口</h2><p>${site.name}<br>${site.address}<br><a href="${site.line}" ${ext}>公式LINEへ ↗</a></p></div></div>`);
-fs.writeFileSync(path.join(out,'robots.txt'),'# Preview: let crawlers read the noindex directives on each page.\nUser-agent: *\nAllow: /\n','utf8');
+fs.writeFileSync(path.join(out,'robots.txt'),'User-agent: *\nAllow: /\n','utf8');
 console.log('Built 6 pages in dist/');
+
+fs.writeFileSync(path.join(out,'.nojekyll'),'');
+console.log(previewBuild ? 'Preview build: noindex enabled.' : 'Public build: indexing allowed.');

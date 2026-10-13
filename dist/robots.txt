@@ -1,3 +1,2 @@
-# Preview: let crawlers read the noindex directives on each page.
 User-agent: *
 Allow: /
