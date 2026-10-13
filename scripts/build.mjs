@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 const root = path.resolve(import.meta.dirname, '..');
 const out = path.join(root, 'dist');
 const previewBuild = process.argv.includes('--preview');
@@ -8,6 +9,9 @@ const site = JSON.parse(fs.readFileSync(path.join(root,'src/site.json'),'utf8'))
 const month = JSON.parse(fs.readFileSync(path.join(root,'src/monthly-schedule.json'),'utf8'));
 fs.mkdirSync(out,{recursive:true});
 for (const name of ['styles.css','app.js']) fs.copyFileSync(path.join(root,'src',name),path.join(out,name));
+// A changed stylesheet gets a new URL so browsers cannot reuse an older cached copy.
+const styleName = `styles.${createHash('sha256').update(fs.readFileSync(path.join(root,'src/styles.css'))).digest('hex').slice(0,12)}.css`;
+fs.copyFileSync(path.join(root,'src/styles.css'),path.join(out,styleName));
 const e=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const yen=n=>Number(n).toLocaleString('ja-JP');
 const arrow='<span class="arrow" aria-hidden="true">↗</span>';
@@ -34,7 +38,7 @@ const intro=(title,en,copy)=>{
 const notice=()=>`<div class="notice"><strong>掲載内容について</strong>最新の内容は、お申し込み前に公式LINEでご確認ください。</div>`;
 const document=(file,title,content)=>{
  const description=file==='index.html'?'福島市のO・TE Dance School。2歳から大人まで、自分らしくダンスを楽しもう。レッスン案内・スケジュール・料金、体験や見学のご相談は公式LINEへ。':`${title}｜福島市のO・TE Dance School。体験・見学のお申し込みは公式LINEへ。`;
- fs.writeFileSync(path.join(out,file),`<!doctype html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${e(description)}">${robotsMeta}<meta name="theme-color" content="#f5f2ea"><meta property="og:type" content="website"><meta property="og:title" content="${e(title)}｜O・TE Dance School"><meta property="og:description" content="${e(description)}"><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css">${file==='index.html'?'<link rel="preload" href="assets/dance-hero.webp" as="image">':''}<title>${e(title)}｜O・TE Dance School</title><script src="app.js" defer></script></head><body id="top">${header(file)}<main id="main">${content}${contact()}</main>${footer()}</body></html>`,'utf8');
+ fs.writeFileSync(path.join(out,file),`<!doctype html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${e(description)}">${robotsMeta}<meta name="theme-color" content="#f5f2ea"><meta property="og:type" content="website"><meta property="og:title" content="${e(title)}｜O・TE Dance School"><meta property="og:description" content="${e(description)}"><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="${styleName}">${file==='index.html'?'<link rel="preload" href="assets/dance-hero.webp" as="image">':''}<title>${e(title)}｜O・TE Dance School</title><script src="app.js" defer></script></head><body id="top">${header(file)}<main id="main">${content}${contact()}</main>${footer()}</body></html>`,'utf8');
 };
 const gallery=[['stage.webp','発表会のステージで踊るメンバー','01 / ON STAGE'],['studio.webp','スタジオでのレッスン風景','02 / IN THE STUDIO'],['community.webp','イベントで笑顔を見せるスクールのメンバー','03 / TOGETHER'],['kids.webp','屋外のイベントで踊るキッズのメンバー','04 / DANCE & SMILE']];
 const news=month.notices.map((n,i)=>`<a class="news-row" href="schedule.html#monthly"><span class="news-type">${i?'LESSON':'SCHEDULE'}</span><span>${e(n)}</span>${arrow}</a>`).join('');
