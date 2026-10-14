@@ -10,14 +10,14 @@
 
 旧公式サイトで公開されている写真を、ユーザーの依頼に基づき使用。WebPに最適化して同梱しています。写真の内容は変更していません。
 
-| ファイル | 出典 |
-| --- | --- |
-| `dist/assets/stage.webp` | https://ote-dance.sakura.ne.jp/ote-hp/wp-content/uploads/2023/01/064.jpg |
-| `dist/assets/studio.webp` | https://ote-dance.sakura.ne.jp/ote-hp/wp-content/uploads/2023/01/1954.jpg |
+| ファイル                     | 出典                                                                          |
+| ---------------------------- | ----------------------------------------------------------------------------- |
+| `dist/assets/stage.webp`     | https://ote-dance.sakura.ne.jp/ote-hp/wp-content/uploads/2023/01/064.jpg      |
+| `dist/assets/studio.webp`    | https://ote-dance.sakura.ne.jp/ote-hp/wp-content/uploads/2023/01/1954.jpg     |
 | `dist/assets/community.webp` | https://ote-dance.sakura.ne.jp/ote-hp/wp-content/uploads/2023/01/DSCN0781.jpg |
-| `dist/assets/kids.webp` | https://ote-dance.sakura.ne.jp/ote-hp/wp-content/uploads/2023/01/DSC_0314.jpg |
-| `dist/assets/family.webp` | https://ote-dance.sakura.ne.jp/ote-hp/wp-content/uploads/2023/01/2064-1.jpg |
-| `dist/assets/exterior.webp` | https://ote-dance.sakura.ne.jp/ote-hp/wp-content/uploads/2023/01/1953-1.jpg |
+| `dist/assets/kids.webp`      | https://ote-dance.sakura.ne.jp/ote-hp/wp-content/uploads/2023/01/DSC_0314.jpg |
+| `dist/assets/family.webp`    | https://ote-dance.sakura.ne.jp/ote-hp/wp-content/uploads/2023/01/2064-1.jpg   |
+| `dist/assets/exterior.webp`  | https://ote-dance.sakura.ne.jp/ote-hp/wp-content/uploads/2023/01/1953-1.jpg   |
 
 Instagramの画像は取得制限のため使用していません。公式プロフィールへのリンクを掲載しています。
 

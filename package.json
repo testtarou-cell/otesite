@@ -8,6 +8,11 @@
     "dev": "node scripts/serve.mjs",
     "preview": "node scripts/serve.mjs",
     "check": "node scripts/check.mjs",
-    "build:preview": "node scripts/build.mjs --preview"
+    "build:preview": "node scripts/build.mjs --preview",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "3.9.10"
   }
 }
