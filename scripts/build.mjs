@@ -221,7 +221,6 @@ await document(
   '楽しめるダンススクール',
   html`<section class="hero" aria-labelledby="hero-title">
       <div class="wrap">
-        <p class="eyebrow" style="color:var(--muted);margin-bottom:12px">プレビュー動作テスト</p>
         <div class="hero-grid">
           <div class="hero-copy">
             <div class="hero-place">
