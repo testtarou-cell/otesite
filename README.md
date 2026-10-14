@@ -18,23 +18,31 @@ https://testtarou-cell.github.io/otesite/
 
 ## 内容を更新する
 
-ソースから公開用HTMLを生成する場合は、Node.js 22以上で実行します。追加のライブラリのインストールは不要です。
+ソースから公開用HTMLを生成する場合は、Node.js 22以上で実行します。最初に `npm ci` で、バージョンを固定した整形ツールをインストールしてください。生成後のサイトを閲覧する人にはインストールは不要です。
 
 ```sh
+npm ci
 npm run build
+npm run format:check
 npm run check
 ```
 
 ビルド後は `index.html` を開き直すか、ブラウザを再読み込みします。開発用のHTTPプレビューを使いたい場合は `npm run dev` を実行します。
 
-| 内容 | ファイル |
-| --- | --- |
-| 公式LINE・Instagram・住所・料金 | `src/site.json` |
-| 月間予定・振替のお知らせ | `src/monthly-schedule.json` |
-| 月間表の画像 | `dist/assets/monthly-schedule.png` |
-| ページの文面・構成 | `scripts/build.mjs` |
-| デザイン | `src/styles.css` |
-| メニュー・写真の拡大 | `src/app.js` |
+### ソースの整形と改行コード
+
+HTML・CSS・JavaScript・JSONは、Prettierでインデントと改行を整えています。編集後は `npm run format` で整形し、`npm run build` でHTMLを再生成します。ビルド時にもHTMLを整形するため、出力が一行に戻ることはありません。
+
+改行コードはLF、文字コードはUTF-8に統一しています。`.gitattributes` はGitでの改行変換を、`.editorconfig` は対応エディターの保存形式を指定します。`npm run format:check` は整形の崩れを確認します。
+
+| 内容                            | ファイル                           |
+| ------------------------------- | ---------------------------------- |
+| 公式LINE・Instagram・住所・料金 | `src/site.json`                    |
+| 月間予定・振替のお知らせ        | `src/monthly-schedule.json`        |
+| 月間表の画像                    | `dist/assets/monthly-schedule.png` |
+| ページの文面・構成              | `scripts/build.mjs`                |
+| デザイン                        | `src/styles.css`                   |
+| メニュー・写真の拡大            | `src/app.js`                       |
 
 Codexへの依頼例：
 
