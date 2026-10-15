@@ -25,6 +25,8 @@ jobs:
       - run: npm run build
       - run: npm run format:check
       - run: npm run check
+      - name: Include domain verification page
+        run: cp webauth.html dist/webauth.html
       - uses: actions/upload-artifact@v4
         with:
           name: website
